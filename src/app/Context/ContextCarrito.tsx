@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import { Producto } from "../Models/Producto";
+import { Carrito } from "../Models/Carrito";
 
 export const ContextCarrito = createContext({
 
@@ -9,6 +10,12 @@ export const ContextCarrito = createContext({
     setProductoCarrito: (producto: Producto[]) =>{},
     agregarCarrito: (producto: Producto) =>{},
     totalPagar : 0,
-    setTotalPagar: (total:number) => {}    
+    setTotalPagar: (total:number) => {},
+    calcularTotalPagar:(item:number)=>{},   
+    carrito:[] as Carrito[],
+    setCarrito: (carrito: Carrito[]) => {},
+    //eliminarDelCarrito: (id: number) => {},
+    eliminarDelCarrito: (producto: Producto) => {},
+
 
 })

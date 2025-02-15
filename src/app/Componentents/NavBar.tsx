@@ -4,7 +4,7 @@ import { useContextCarrito } from '../Provider/Provider'
 
 export default function NavBar() {
 
-    const {productoCarrito} = useContextCarrito()
+    const {carrito} = useContextCarrito()
 
 
 
@@ -31,7 +31,7 @@ export default function NavBar() {
                             <button type="button" className="btn btn-primary position-relative">
                                 Carrito
                                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {productoCarrito.length}
+                                    {carrito.length}
                                 </span>
                             </button>
                             </Link>

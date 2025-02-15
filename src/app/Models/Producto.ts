@@ -1,8 +1,8 @@
 export interface Producto{
-    IdProducto:number
-    nombreProducto:string
+    idProducto:number
+    nombre:string
     precioProducto:number
-    isvProducto:number
-    imagenProducto:string
+    isv:number
+    img:string
     
 }

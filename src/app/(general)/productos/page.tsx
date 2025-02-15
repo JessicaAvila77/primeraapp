@@ -1,63 +1,47 @@
-'use client'
-import CardList from '@/app/Componentents/CardList'
-import { Producto } from '@/app/Models/Producto'
-import { useContextCarrito } from '@/app/Provider/Provider'
-import React, { useEffect } from 'react'
-
+"use client";
+import BotonAgregar from "@/app/Componentents/BotonAgregar";
+import CardList from "@/app/Componentents/CardList";
+import { Producto } from "@/app/Models/Producto";
+import { useContextCarrito } from "@/app/Provider/Provider";
+import React, { useEffect } from "react";
 
 export default function page() {
+  const { producto, setProducto } = useContextCarrito();
 
-    const {producto, setProducto} =useContextCarrito()
+  async function cargarProductos() {
+    try {
+      const res = await fetch("http://localhost:5000/producto");
+      const data = await res.json();
 
-    useEffect(() => {
+      setProducto(data);
+    } catch (error) {
+      console.log("Ocurrio un error al invocar el servicio de producto");
+    }
+  }
 
-      let body: Producto[] = 
-      [
-        {
-          IdProducto : producto.length+1,
-          nombreProducto:"Tennis",
-          precioProducto:1500,
-          isvProducto:12,
-          imagenProducto:"https://th.bing.com/th/id/OIP.N9LsV5PDQBmJzhpfWfaTBwHaHa?w=189&h=190&c=7&r=0&o=5&dpr=1.5&pid=1.7"
-          
-        },
-
-        {
-          IdProducto : producto.length+2,
-          nombreProducto:"Sombrero",
-          precioProducto:1000,
-          isvProducto:12,
-          imagenProducto:"https://th.bing.com/th/id/OIP.xhev3T8ZTwnZz1H7fAvV7QHaF-?w=235&h=190&c=7&r=0&o=5&dpr=1.5&pid=1.7"
-         
-        }
-      ]
-
-      setProducto(body)
-
-    }, [])
-
+  useEffect(() => {
+    cargarProductos();
+  }, []);
 
   return (
-    <div>
-
-      <div className='row'>
-          {
-
-            producto.map((item) => (
-              <CardList {...item}></CardList>
-            ))
-          }
-
-
-
+    <>
+      <div className="container">
+        <div className="items-center justify-items-center">
+          
         </div>
-
-      
-
-
-      
-
-
-    </div>
-  )
+        <div className="row">
+          {producto.map((item) => (
+            <>
+              <div className="col-md-3" key={item.idProducto}>
+                <div className="card">
+                  <CardList {...item}></CardList>
+                  <BotonAgregar {...item}></BotonAgregar>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </>
+  );
 }
